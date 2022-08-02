@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html manifest="cache.manifest" type="text/cache-manifest">
+<!--<html>-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1 maximum-scale=1" />
+    <title>@ViewData["Title"]</title>
+
+</head>
+<body style="margin: 0px">
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @*<environment include="Development">
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/lib/binaryajax.js" asp-append-version="true"></script>
+            <script src="~/lib/hammer.js" asp-append-version="true"></script>
+            <script src="~/js/binarywrapper.js" asp-append-version="true"></script>
+            <script src="~/js/storage.js" asp-append-version="true"></script>
+            <script src="~/js/shapefile.js" asp-append-version="true"></script>
+            <script src="~/js/dbf.js" asp-append-version="true"></script>
+            <script src="~/js/map.js" asp-append-version="true"></script>
+            <script src="~/js/layer.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+        </environment>*@
+
+    @*<script src="~/js/bundle.js" asp-append-version="false"></script>*@
+    @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
+    <script src="~/js/site.js" asp-append-version="false"></script>
+    <script src="~/lib/binaryajax.js" asp-append-version="false"></script>
+    <script src="~/lib/hammer.js" asp-append-version="false"></script>
+    <script src="~/js/binarywrapper.js" asp-append-version="false"></script>
+    <script src="~/js/storage.js" asp-append-version="false"></script>
+     <script src="~/js/shapefile.js" asp-append-version="false"></script>
+    <script src="~/js/map.js" asp-append-version="false"></script>
+    <script src="~/js/layer.js" asp-append-version="false"></script>
+    <script src="~/js/convert.js" asp-append-version="false"></script>
+   <script src="~/js/serviceworker.js" asp-append-version="false"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+

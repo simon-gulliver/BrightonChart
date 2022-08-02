@@ -1,0 +1,175 @@
+﻿@page
+@{
+    ViewData["Title"] = "Brighton Chart";
+}
+
+<script type="text/javascript">
+    var RenderFlag = {
+        UnZoomed: 1,
+        Zoomed: 2,
+        MarineSymbols: 4,
+        LandFeatures: 8,
+        Title: 16
+    };
+
+    var mainbox = { x: 692977, y: 5630323, width: 8470, height: 6464 };
+    var zoombox = { loX: 620000, loY: 5552171, hiX: 720000, hiY: 5678933 };
+    //var zoombox = { loX: 560000, loY: 5452171, hiX: 820000, hiY: 5778933 };
+    var currentRenderFlags = RenderFlag.Zoomed + RenderFlag.MarineSymbols + RenderFlag.LandFeatures;
+
+    window.onload = function () {
+
+        var img = document.getElementById("i115");
+        var canvas = document.getElementById('canvas1');
+        var ctx = canvas.getContext('2d');
+        var marsh = ctx.createPattern(img, "repeat");
+
+        map = new Map([
+            new Layer('UK_Coast', RenderFlag.UnZoomed, { fillStyle: '#fadfa8', strokeStyle: '#5c3d1f', lineWidth: '0.5' })
+            , new Layer('bathy', RenderFlag.Zoomed, { fillStyle: '#fadfa8', strokeStyle: '#5c3d1f', lineWidth: '0.5' })
+            , new Layer('bathy', RenderFlag.UnZoomed, { strokeStyle: '#5c3d1f', lineWidth: '0.5' })
+            , new Layer('bathycontours', RenderFlag.Title, { textStyle: 'blue' })
+            , new Layer('landCoverRegion', RenderFlag.LandFeatures, { fillStyle: '#B99653', strokeStyle: 'black', textStyle: '#B99653' })
+            , new Layer('marsh', RenderFlag.LandFeatures, { fillStyle: marsh, strokeStyle: 'gray' })
+            , new Layer('waterbodies', RenderFlag.LandFeatures, { fillStyle: 'lblue', strokeStyle: 'gray' })
+            , new Layer('landCoverLine', RenderFlag.LandFeatures, { strokeStyle: 'black' })
+            , new Layer('landCoverPoint', RenderFlag.LandFeatures, { strokeStyle: 'red', textStyle: 'blue'  })
+            , new Layer('majorRoads', RenderFlag.LandFeatures, { strokeStyle: 'black' })
+            , new Layer('geology', RenderFlag.Zoomed + RenderFlag.Title, {})
+            , new Layer('symbols', RenderFlag.Zoomed + RenderFlag.MarineSymbols, {})
+        ]);
+
+        //debugger;
+        storageReadAll(map);
+
+    }
+</script>
+
+<div id="map">
+    <div style='z-Index:5000;background-color: steelblue;position:absolute;width:140px'>
+        <input type="checkbox" id="title"><label for="msym">Labels</label><br />
+        <input type="checkbox" id="lsym" checked="checked"><label for="lsym">Land Features</label><br />
+        <input type="checkbox" id="msym" checked="checked"><label for="msym">Marine Symbols</label><br />
+    </div>
+    <canvas id="canvas1" style='z-Index:10'></canvas>
+</div>
+<div style="display:none">
+    <img id="i0" src="~/images/1000.PNG" />
+    <img id="i1" src="~/images/10201.PNG" />
+    <img id="i2" src="~/images/10302.PNG" />
+    <img id="i3" src="~/images/10401.png" />
+    <img id="i4" src="~/images/10404.png" />
+    <img id="i5" src="~/images/10500.PNG" />
+    <img id="i6" src="~/images/11000.png" />
+    <img id="i7" src="~/images/11100.PNG" />
+    <img id="i8" src="~/images/12300.PNG" />
+    <img id="i9" src="~/images/12400.PNG" />
+    <img id="i10" src="~/images/12800.PNG" />
+    <img id="i11" src="~/images/1401.png" />
+    <img id="i12" src="~/images/1402.png" />
+    <img id="i13" src="~/images/1403.png" />
+    <img id="i14" src="~/images/1404.png" />
+    <img id="i15" src="~/images/14401.png" />
+    <img id="i16" src="~/images/14402.png" />
+    <img id="i17" src="~/images/14403.png" />
+    <img id="i18" src="~/images/14404.png" />
+    <img id="i19" src="~/images/14405.png" />
+    <img id="i20" src="~/images/14406.PNG" />
+    <img id="i21" src="~/images/14407.png" />
+    <img id="i22" src="~/images/14410.png" />
+    <img id="i23" src="~/images/14411.png" />
+    <img id="i24" src="~/images/14412.PNG" />
+    <img id="i25" src="~/images/14413.png" />
+    <img id="i26" src="~/images/14414.png" />
+    <img id="i27" src="~/images/14418.png" />
+    <img id="i28" src="~/images/14419.png" />
+    <img id="i29" src="~/images/14421.png" />
+    <img id="i30" src="~/images/14422.png" />
+    <img id="i31" src="~/images/14424.PNG" />
+    <img id="i32" src="~/images/14433.PNG" />
+    <img id="i33" src="~/images/1502.PNG" />
+    <img id="i34" src="~/images/15900.png" />
+    <img id="i35" src="~/images/15901.PNG" />
+    <img id="i36" src="~/images/15902.PNG" />
+    <img id="i37" src="~/images/15903.PNG" />
+    <img id="i38" src="~/images/15904.PNG" />
+    <img id="i39" src="~/images/15905.PNG" />
+    <img id="i40" src="~/images/1600.PNG" />
+    <img id="i41" src="~/images/1701.png" />
+    <img id="i42" src="~/images/1702.png" />
+    <img id="i43" src="~/images/1800.png" />
+    <img id="i44" src="~/images/1900.png" />
+    <img id="i45" src="~/images/2900.PNG" />
+    <img id="i46" src="~/images/29600.png" />
+    <img id="i47" src="~/images/29601.png" />
+    <img id="i48" src="~/images/29602.png" />
+    <img id="i49" src="~/images/29603.png" />
+    <img id="i50" src="~/images/29619.png" />
+    <img id="i51" src="~/images/29620.png" />
+    <img id="i52" src="~/images/29651.png" />
+    <img id="i53" src="~/images/29653.png" />
+    <img id="i54" src="~/images/29655.png" />
+    <img id="i55" src="~/images/29656.png" />
+    <img id="i56" src="~/images/29657.png" />
+    <img id="i57" src="~/images/3900.png" />
+    <img id="i58" src="~/images/400.PNG" />
+    <img id="i59" src="~/images/4401.PNG" />
+    <img id="i60" src="~/images/500.png" />
+    <img id="i61" src="~/images/501.png" />
+    <img id="i62" src="~/images/502.png" />
+    <img id="i63" src="~/images/503.png" />
+    <img id="i64" src="~/images/504.png" />
+    <img id="i65" src="~/images/5802.PNG" />
+    <img id="i66" src="~/images/5803.PNG" />
+    <img id="i67" src="~/images/5805.PNG" />
+    <img id="i68" src="~/images/5807.PNG" />
+    <img id="i69" src="~/images/5808.PNG" />
+    <img id="i70" src="~/images/5809.PNG" />
+    <img id="i71" src="~/images/5810.PNG" />
+    <img id="i72" src="~/images/600.png" />
+    <img id="i73" src="~/images/6400.PNG" />
+    <img id="i74" src="~/images/701.png" />
+    <img id="i75" src="~/images/702.png" />
+    <img id="i76" src="~/images/7100.png" />
+    <img id="i77" src="~/images/7500.png" />
+    <img id="i78" src="~/images/7600.PNG" />
+    <img id="i79" src="~/images/7700.PNG" />
+    <img id="i80" src="~/images/800.PNG" />
+    <img id="i81" src="~/images/8401.PNG" />
+    <img id="i82" src="~/images/8403.PNG" />
+    <img id="i83" src="~/images/8405.png" />
+    <img id="i84" src="~/images/8600.PNG" />
+    <img id="i85" src="~/images/8603.png" />
+    <img id="i86" src="~/images/8606.png" />
+    <img id="i87" src="~/images/8607.png" />
+    <img id="i88" src="~/images/8609.png" />
+    <img id="i89" src="~/images/8700.png" />
+    <img id="i90" src="~/images/900.png" />
+    <img id="i91" src="~/images/9000.PNG" />
+    <img id="i92" src="~/images/9003.png" />
+    <img id="i93" src="~/images/9100.PNG" />
+    <img id="i94" src="~/images/9101.PNG" />
+    <img id="i95" src="~/images/9102.PNG" />
+    <img id="i96" src="~/images/Borehole.PNG" />
+    <img id="i97" src="~/images/Building.png" />
+    <img id="i98" src="~/images/CPT.PNG" />
+    <img id="i99" src="~/images/Crane.png" />
+    <img id="i0" src="~/images/EastCardinalBuoy.png" />
+    <img id="i101" src="~/images/euroports.png" />
+    <img id="i102" src="~/images/FortifiedStructure.png" />
+    <img id="i103" src="~/images/landing.png" />
+    <img id="i104" src="~/images/Landmark.png" />
+    <img id="i105" src="~/images/NorthCardinalBuoy.png" />
+    <img id="i106" src="~/images/Ports.PNG" />
+    <img id="i107" src="~/images/PortSafetyBuoy.PNG" />
+    <img id="i108" src="~/images/Pylon.png" />
+    <img id="i109" src="~/images/Silo.png" />
+    <img id="i110" src="~/images/SouthCardinalBuoy.png" />
+    <img id="i111" src="~/images/StarboardSafetyBuoy.PNG" />
+    <img id="i112" src="~/images/Vibracore.PNG" />
+    <img id="i113" src="~/images/WaveBuoy.PNG" />
+    <img id="i114" src="~/images/WestCardinalBuoy.png" />
+    <img id="i115" src="~/images/Marsh.png" />
+    <img id="elephant" />
+</div>
+
